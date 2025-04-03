@@ -1,9 +1,9 @@
 /*!
- * Snippet-Actions v1.0.25
+ * Snippet-Actions v1.0.26
  * 文本片段处理工具集。
  * Author: 稻米鼠
  * Created: 2025-04-02 18:07:00
- * Updated: 2025-04-03 14:32:41
+ * Updated: 2025-04-03 18:20:43
  * Repository: https://github.com/dmscode/Snippet-Actions.git
  */
 var SA = (() => {
@@ -33,7 +33,7 @@ var SA = (() => {
     "package.json"(exports, module) {
       module.exports = {
         name: "Snippet-Actions",
-        version: "1.0.25",
+        version: "1.0.26",
         description: "\u6587\u672C\u7247\u6BB5\u5904\u7406\u5DE5\u5177\u96C6\u3002",
         main: "dist/main.js",
         repository: "https://github.com/dmscode/Snippet-Actions.git",
@@ -186,8 +186,59 @@ ${code}
      * 无序列表处理器，将无序列表项转换为带表情符号的格式
      */
     unorderedListHandler(content) {
-      return content.replace(/^([ \t]*)[-+*] (.*)/gm, (match, space, text) => {
-        return `${space}${space.length ? "\u{1F539}" : "\u{1F538}"} ${text}`;
+      const taskStatus = {
+        " ": "\u2B1C",
+        // 待办
+        "/": "\u{1F6A7}",
+        // 未完成
+        "x": "\u2705",
+        // 已完成
+        "-": "\u274C",
+        // 已取消
+        ">": "\u2197\uFE0F",
+        // 已转发
+        "<": "\u{1F4C5}",
+        // 日程安排
+        "?": "\u2753",
+        // 问题
+        "!": "\u2757",
+        // 重要
+        "*": "\u2B50",
+        // 星标
+        '"': "\u{1F4AC}",
+        // 引用
+        "l": "\u{1F4CD}",
+        // 位置
+        "b": "\u{1F516}",
+        // 书签
+        "i": "\u2139\uFE0F",
+        // 信息
+        "S": "\u{1F4B0}",
+        // 储蓄
+        "I": "\u{1F4A1}",
+        // 想法
+        "p": "\u{1F44D}",
+        // 优点
+        "c": "\u{1F44E}",
+        // 缺点
+        "f": "\u{1F525}",
+        // 火热
+        "k": "\u{1F511}",
+        // 关键
+        "w": "\u{1F3C6}",
+        // 胜利
+        "u": "\u{1F4C8}",
+        // 上升
+        "d": "\u{1F4C9}"
+        // 下降
+      };
+      return content.replace(/^([ \t]*)[-+*] +(.*)/gm, (match, space, text) => {
+        let isTask = false;
+        text = text.replace(/^\[(.)\]\s+/, (match2, status) => {
+          isTask = true;
+          return (taskStatus[status] || `\u3010${status}\u3011`) + " ";
+        });
+        return `${space.length ? "\u{1F539}" : "\u{1F538}"}${isTask ? "" : " "}${text}`;
       });
     }
     /**
