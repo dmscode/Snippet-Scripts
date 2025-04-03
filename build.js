@@ -12,6 +12,12 @@ fs.copySync('public', 'dist', {
   errorOnExist: false
 });
 
+// 更新Service Worker的缓存版本
+const swPath = path.join('dist', 'sw.js');
+let swContent = fs.readFileSync(swPath, 'utf8');
+swContent = swContent.replace(/const CACHE_NAME = '.*?'/, `const CACHE_NAME = 'snippet-actions-v${pkg.version}'`);
+fs.writeFileSync(swPath, swContent);
+
 esbuild.build({
   banner: {
     js: `/*!
