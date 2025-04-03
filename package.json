@@ -1,6 +1,6 @@
 {
   "name": "Snippet-Actions",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "文本片段处理工具集。",
   "main": "dist/main.js",
   "repository": "https://github.com/dmscode/Snippet-Actions.git",
