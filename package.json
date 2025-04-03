@@ -1,0 +1,23 @@
+{
+  "name": "Snippet-Actions",
+  "version": "1.0.20",
+  "description": "文本片段处理工具集。",
+  "main": "dist/main.js",
+  "repository": "https://github.com/dmscode/Snippet-Actions.git",
+  "author": "稻米鼠",
+  "scripts": {
+    "build": "yarn version --patch && node build.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "esbuild": "^0.19.11",
+    "fs-extra": "^11.3.0",
+    "jest": "^29.7.0",
+    "jest-html-reporters": "^3.1.7",
+    "ts-jest": "^29.3.1",
+    "typescript": "^5.8.2"
+  },
+  "license": "UNLICENSED"
+}
