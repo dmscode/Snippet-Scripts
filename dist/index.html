@@ -241,6 +241,14 @@
     </div>
     <script defer>
         const SnippetActions = SA.SnippetActions
+        const readClipboard = async () => {
+            let text
+            try {
+                text = await navigator.clipboard.readText();
+            } catch (err) {}
+            if(!text || !text.length) text = prompt('未能成功读取剪切板，请输入需处理文本：')
+            return text || ''
+        }
         // 初始化事件监听
         document.addEventListener('DOMContentLoaded', () => {
             const versionContainer = document.getElementById('version');
@@ -268,13 +276,11 @@
                 });
                 button.addEventListener('click', async () => {
                     try {
-                        // 读取剪贴板内容
-                        const text = await navigator.clipboard.readText();
+                        const text = await readClipboard();
                         const snippetActions = new SnippetActions(text);
 
                         // 执行工作流
                         const result = snippetActions.runWorkflow(flowName);
-
                         // 写回剪贴板
                         await navigator.clipboard.writeText(result);
                         document.getElementById('modal-content').textContent = result;
@@ -304,8 +310,7 @@
                 });
                 button.addEventListener('click', async () => {
                     try {
-                        // 读取剪贴板内容
-                        const text = await navigator.clipboard.readText();
+                        const text = await readClipboard();
                         const snippetActions = new SnippetActions(text);
                         
                         // 执行操作
