@@ -1,9 +1,9 @@
 /*!
- * Snippet-Actions v1.0.26
+ * Snippet-Actions v1.0.28
  * 文本片段处理工具集。
  * Author: 稻米鼠
  * Created: 2025-04-02 18:07:00
- * Updated: 2025-04-03 18:20:43
+ * Updated: 2025-04-03 20:43:44
  * Repository: https://github.com/dmscode/Snippet-Actions.git
  */
 var SA = (() => {
@@ -33,7 +33,7 @@ var SA = (() => {
     "package.json"(exports, module) {
       module.exports = {
         name: "Snippet-Actions",
-        version: "1.0.26",
+        version: "1.0.28",
         description: "\u6587\u672C\u7247\u6BB5\u5904\u7406\u5DE5\u5177\u96C6\u3002",
         main: "dist/main.js",
         repository: "https://github.com/dmscode/Snippet-Actions.git",
@@ -238,7 +238,7 @@ ${code}
           isTask = true;
           return (taskStatus[status] || `\u3010${status}\u3011`) + " ";
         });
-        return `${space.length ? "\u{1F539}" : "\u{1F538}"}${isTask ? "" : " "}${text}`;
+        return `${space.length ? "\u{1F539}" : "\u{1F53B}"}${isTask ? "" : " "}${text}`;
       });
     }
     /**
