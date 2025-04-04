@@ -4,8 +4,11 @@ const ASSETS_TO_CACHE = [
   './index.html',
   './main.js',
   './manifest.json',
-  './icons/icon-192x192.svg',
-  './icons/icon-512x512.svg'
+  './assets/icon-192x192.svg',
+  './assets/icon-512x512.svg',
+  './assets/app.js',
+  './assets/style.css',
+  './assets/modal.js'
 ];
 
 self.addEventListener('install', (event) => {
