@@ -1,4 +1,4 @@
-const CACHE_NAME = 'snippet-actions-v1.0.45';
+const CACHE_NAME = 'snippet-actions-v1.0.46';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -7,7 +7,8 @@ const ASSETS_TO_CACHE = [
   './assets/icon-192x192.svg',
   './assets/icon-512x512.svg',
   './assets/app.js',
-  './assets/style.css'
+  './assets/style.css',
+  './assets/modal.js'
 ];
 
 self.addEventListener('install', (event) => {

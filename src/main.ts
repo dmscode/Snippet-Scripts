@@ -4,6 +4,7 @@ import { RemoveZeroWidthChars } from "./actions/RemoveZeroWidthChars";
 import { CorrectCase } from "./actions/CorrectCase";
 import { EmojiMarkdown } from "./actions/EmojiMarkdown";
 import { WhiteSpace } from "./actions/WhiteSpace";
+import { FormatExpression } from "./actions/FormatExpression";
 
 /**
  * 文本片段处理类
@@ -31,7 +32,17 @@ export class SnippetActions {
             name: '盘古之白',
             description: '在中文和英文/数字之间添加空格',
             action: WhiteSpace,
-        }
+        },
+        FormatExpression: {
+            name: '格式化计算式（Use）',
+            description: '替换因为输入法为正确切换而产生的异体字符',
+            action: FormatExpression,
+        },
+        FormatExpressionToDisplay: {
+            name: '格式化计算式（Display）',
+            description: '将运算符等替换为标准的数学符号',
+            action: (input) => FormatExpression(input, true),
+        },
     }
     workflows = {
         Markdown: {

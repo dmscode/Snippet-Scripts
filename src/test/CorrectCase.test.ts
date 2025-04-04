@@ -43,6 +43,12 @@ describe('CorrectCase', () => {
             expect(CorrectCase(input)).toBe(expected);
         });
 
+        it('应该正确处理包含特殊字符的文本', () => {
+            const input = 'using notepad++!!! and notepad???';
+            const expected = 'using Notepad++!!! and notepad???';
+            expect(CorrectCase(input)).toBe(expected);
+        });
+
         it('应该正确处理连续的词典词汇', () => {
             const input = 'obsidian vscode obsidian';
             const expected = 'Obsidian VS Code Obsidian';
