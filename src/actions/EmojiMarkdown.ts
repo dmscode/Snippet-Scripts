@@ -13,6 +13,7 @@ class markdownRender {
         this.orderedListHandler.bind(this),
         this.spanTextHandler.bind(this),
         this.urlHandler.bind(this),
+        this.removeEmptyLines.bind(this),
     ]
 
     constructor(content: string) {
@@ -154,6 +155,15 @@ ${code}
             .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '🔗【$1】( $2 )')
             // 处理引用链接 [文本][引用]
             .replace(/\[([^\]]+)\]\[\^?([^\]]+)\]/g, '🔗【$1】[📍$2]')
+    }
+    /**
+     * 空行处理器，用于移除文本中的多余空行
+     * @param content 需要处理的文本内容
+     * @returns 处理后的文本
+     */
+    private removeEmptyLines(content:string) {
+        // 使用正则表达式将连续的两个或更多空行替换为单个换行符
+        return content.replace(/^(\s*\r?\n){2,}$/gm, '\n')
     }
 }
 

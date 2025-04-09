@@ -1,9 +1,9 @@
 /*!
- * Snippet-Actions v1.0.55
+ * Snippet-Actions v1.0.56
  * 文本片段处理工具集。
  * Author: 稻米鼠
  * Created: 2025-04-02 18:07:00
- * Updated: 2025-04-09 12:50:57
+ * Updated: 2025-04-09 17:06:14
  * Repository: https://github.com/dmscode/Snippet-Actions.git
  */
 "use strict";
@@ -34,7 +34,7 @@ var SA = (() => {
     "package.json"(exports, module) {
       module.exports = {
         name: "Snippet-Actions",
-        version: "1.0.55",
+        version: "1.0.56",
         description: "\u6587\u672C\u7247\u6BB5\u5904\u7406\u5DE5\u5177\u96C6\u3002",
         main: "dist/main.js",
         repository: "https://github.com/dmscode/Snippet-Actions.git",
@@ -812,7 +812,8 @@ var SA = (() => {
         this.unorderedListHandler.bind(this),
         this.orderedListHandler.bind(this),
         this.spanTextHandler.bind(this),
-        this.urlHandler.bind(this)
+        this.urlHandler.bind(this),
+        this.removeEmptyLines.bind(this)
       ];
       this.content = content;
     }
@@ -945,6 +946,14 @@ ${code}
      */
     urlHandler(content) {
       return content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "\u{1F517}\u3010$1\u3011( $2 )").replace(/\[([^\]]+)\]\[\^?([^\]]+)\]/g, "\u{1F517}\u3010$1\u3011[\u{1F4CD}$2]");
+    }
+    /**
+     * 空行处理器，用于移除文本中的多余空行
+     * @param content 需要处理的文本内容
+     * @returns 处理后的文本
+     */
+    removeEmptyLines(content) {
+      return content.replace(/^(\s*\r?\n){2,}$/gm, "\n");
     }
   };
   var EmojiMarkdown = (input) => {
