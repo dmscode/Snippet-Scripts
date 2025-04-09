@@ -1,9 +1,9 @@
 /*!
- * Snippet-Actions v1.0.46
+ * Snippet-Actions v1.0.55
  * 文本片段处理工具集。
  * Author: 稻米鼠
  * Created: 2025-04-02 18:07:00
- * Updated: 2025-04-04 21:40:59
+ * Updated: 2025-04-09 12:50:57
  * Repository: https://github.com/dmscode/Snippet-Actions.git
  */
 "use strict";
@@ -34,7 +34,7 @@ var SA = (() => {
     "package.json"(exports, module) {
       module.exports = {
         name: "Snippet-Actions",
-        version: "1.0.46",
+        version: "1.0.55",
         description: "\u6587\u672C\u7247\u6BB5\u5904\u7406\u5DE5\u5177\u96C6\u3002",
         main: "dist/main.js",
         repository: "https://github.com/dmscode/Snippet-Actions.git",
@@ -787,11 +787,10 @@ var SA = (() => {
     return dictMap;
   };
   var defaultDict = getDict(CASE_SENSITIVE_WORDS);
-  console.log(defaultDict);
   var CorrectCase = (input, dict) => {
     if (!input)
       return "";
-    dict = dict ? getDict(dict) : defaultDict;
+    dict = dict instanceof Map ? dict : Array.isArray(dict) ? getDict(dict) : defaultDict;
     let result = input;
     for (const [key, value] of dict.entries()) {
       const regexKey = key.replace(/([+.])/g, "\\$1");
@@ -840,7 +839,7 @@ var SA = (() => {
      * 代码块处理器，将代码块转换为带表情符号的格式
      */
     codeBlockHandler(content) {
-      return content.replace(/^`{3,}(\w*)\n+([\s\S]*?)\n`{3,}\n/gm, (match, language, code) => {
+      return content.replace(/^`{3,}(\w*)\r?\n+([\s\S]*?)\r?\n`{3,}\r?\n/gm, (match, language, code) => {
         return `\u{1F4BB}${language.length ? language + " " : ""}Code\u{1F4BB}
 ${code}
 \u{1F4BB}Code End!\u{1F4BB}`;

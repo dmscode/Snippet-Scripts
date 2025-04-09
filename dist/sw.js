@@ -1,4 +1,4 @@
-const CACHE_NAME = 'snippet-actions-v1.0.46';
+const CACHE_NAME = 'snippet-actions-v1.0.55';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

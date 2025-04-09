@@ -45,7 +45,7 @@ class markdownRender {
      * 代码块处理器，将代码块转换为带表情符号的格式
      */
     private codeBlockHandler(content:string) {
-        return content.replace(/^`{3,}(\w*)\n+([\s\S]*?)\n`{3,}\n/gm, (match, language, code) => {
+        return content.replace(/^`{3,}(\w*)\r?\n+([\s\S]*?)\r?\n`{3,}\r?\n/gm, (match, language, code) => {
             return `💻${language.length ? language+' ' : ''}Code💻
 ${code}
 💻Code End!💻`;
@@ -100,9 +100,9 @@ ${code}
         return content.replace(/^([ \t]*)[-+*] +(.*)/gm, (match, space, text) => {
             let isTask = false
             // 检查是否为任务列表项
-            text = text.replace(/^\[(.)\]\s+/, (match, status) => {
+            text = text.replace(/^\[(.)\]\s+/, (match:string, status: string) => {
                 isTask = true
-                return (taskStatus[status] || `【${status}】`)+ ' ';
+                return (taskStatus[status as keyof typeof taskStatus] || `【${status}】`) + ' ';
             })
             // 根据缩进层级选择表情符号：无缩进使用🔻，有缩进使用🔹
             return `${ space.length? '🔹' : '🔻' }${isTask ? '' : ' '}${text}`;

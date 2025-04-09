@@ -22,7 +22,8 @@ jobs:
           tag_name: v${{ steps.package-version.outputs.version }}
           name: Release v${{ steps.package-version.outputs.version }}
           files: |
-            dist/*
+            dist/main.js
+            dist/main.js.map
           draft: false
           prerelease: false
         env:

@@ -731,7 +731,7 @@ const CASE_SENSITIVE_WORDS = [
  * @param dict 包含大小写敏感词的数组
  * @returns 返回一个 Map，key 为小写词，value 为原始词
  */
-const getDict = (dict) => {
+const getDict = (dict: string[]): Map<string, string> => {
     // 创建新的 Map 用于存储词典
     const dictMap = new Map();
     
@@ -752,8 +752,6 @@ const getDict = (dict) => {
 // 使用默认词典初始化
 const defaultDict = getDict(CASE_SENSITIVE_WORDS);
 
-console.log(defaultDict);
-
 /**
  * 修正文本中单词的大小写
  * @param input 需要处理的输入文本
@@ -764,7 +762,7 @@ export const CorrectCase = (input: string, dict?: string[] | Map<string, string>
     // 处理空输入
     if(!input) return '';
     // 使用提供的词典或默认词典
-    dict = dict ? getDict(dict) : defaultDict;
+    dict = dict instanceof Map ? dict : (Array.isArray(dict) ? getDict(dict) : defaultDict);
     let result = input;
     
     // 遍历词典进行大小写修正
